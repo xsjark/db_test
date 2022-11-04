@@ -21,10 +21,10 @@ const dropTable = (table) => {
 // insert dummy data into create "FACTURA" and  "FACTURA_ITEMS"
 const populateTable = () => {
     for (let i = 0; i < 100; i++) {
-        let randomUserName = getRandomFromArray(names) + getRandomInt(1000);
+        let randomUserName = getRandomFromArray(names) + getRandomInt(1,1000);
         let randomName = getRandomFromArray(names);
         let randomDate = getRandomDate();
-        let randomQuantity = getRandomInt(10);
+        let randomQuantity = getRandomInt(1, 10);
         let randomCity = getRandomFromArray(cities)
         db.run(`
             INSERT INTO FACTURA(username, fecha, total, nombre_cliente, ciudad) 
@@ -54,6 +54,13 @@ const oldestFactura = () => {
     })   
 }
 
+const sortBy = (column = "total") => {
+    db.all(`SELECT * FROM FACTURA ORDER BY ${column} DESC`, function (err, rows) {
+        console.log(err);
+        console.log(rows)
+    })   
+}
+
 db.serialize(() => {
     dropTable("FACTURA")
 
@@ -71,6 +78,7 @@ db.serialize(() => {
     sumColumns()
     highestFactura()
     oldestFactura()
+    sortBy()
 })
 
 
