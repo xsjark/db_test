@@ -51,7 +51,7 @@ node orderBy.js fecha
 Cambiar el nombre de la columna `total` por `total_factura`. Ademas, puede incluir argumentos para cambia diferents columnas.
 ```bash
 
-node renameColumn.js <arg1> <arrg2> <-- default total y total_factura
+node renameColumn.js <arg1> <arg2> <-- default total y total_factura
 node renameColumn.js fecha date
 
 ```
