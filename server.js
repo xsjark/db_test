@@ -40,6 +40,12 @@ const sumColumns = () => {
     });
 }
 
+const highestFactura = () => {
+    db.all("SELECT MAX(total) FROM FACTURA", function (err, rows) {
+        console.log(err);
+        console.log(rows)
+    })
+}
 
 db.serialize(() => {
     dropTable("FACTURA")
@@ -56,6 +62,7 @@ db.serialize(() => {
     });
 
     sumColumns()
+    highestFactura()
 })
 
 
