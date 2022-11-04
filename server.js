@@ -47,6 +47,13 @@ const highestFactura = () => {
     })
 }
 
+const oldestFactura = () => {
+    db.all("SELECT *, MIN(fecha) FROM FACTURA", function (err, rows) {
+        console.log(err);
+        console.log(rows)
+    })   
+}
+
 db.serialize(() => {
     dropTable("FACTURA")
 
@@ -63,6 +70,7 @@ db.serialize(() => {
 
     sumColumns()
     highestFactura()
+    oldestFactura()
 })
 
 
