@@ -1,7 +1,7 @@
 const myArgs = process.argv.slice(2);
 const sqlite = require("sqlite3").verbose();
 
-const db = new sqlite.Database("../facturas.db", sqlite.OPEN_READWRITE, err => {
+const db = new sqlite.Database("./facturas.db", sqlite.OPEN_READWRITE, err => {
     if (err) {
         console.error(err)
     }
