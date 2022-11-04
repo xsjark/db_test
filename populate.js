@@ -9,7 +9,7 @@ const db = new sqlite.Database("./facturas.db", sqlite.OPEN_READWRITE, err => {
 
 // create "FACTURA" and  "FACTURA_ITEMS"
 const createFacturaTable = `CREATE TABLE IF NOT EXISTS FACTURA(ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, fecha TEXT, total INTEGER, nombre_cliente TEXT, ciudad TEXT)`
-const createFacturaItemsTable = `CREATE TABLE IF NOT EXISTS FACTURA_ITEMS(ID INTEGER PRIMARY KEY, idFactura TEXT, producto TEXT, cantidad INTEGER)`
+const createFacturaItemsTable = `CREATE TABLE IF NOT EXISTS FACTURA_ITEMS(ID INTEGER PRIMARY KEY, idFactura TEXT, producto TEXT, cantidad INTEGER, FOREIGN KEY(idFactura) REFERENCES FACTURA(ID))`
 
 
 const dropTable = (table) => {
@@ -47,6 +47,8 @@ db.serialize(() => {
         console.log(err);
         console.log(rows);
     });
+
+    
 })
 
 
