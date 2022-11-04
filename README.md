@@ -39,10 +39,6 @@ node renameColumn.js fecha date
 
 ```
 
-
-
-
-# Task
 Crea una tabla en sqlite en el navegador.
 Crea la tabla `FACTURA`.
 	id string (primary key)
