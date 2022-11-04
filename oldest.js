@@ -18,5 +18,4 @@ db.serialize(() => {
     oldestFactura()
 })
 
-
 db.close()

@@ -1,8 +1,6 @@
 const sqlite = require("sqlite3").verbose();
 const { names, cities, getRandomInt, getRandomFromArray, getRandomDate } = require("./utils.js")
-let factura_array = new Array(100)
 
-// connect to facturas db
 const db = new sqlite.Database("./facturas.db", sqlite.OPEN_READWRITE, err => {
     if (err) {
         console.error(err)
@@ -22,7 +20,7 @@ const dropTable = (table) => {
 const populateTable = () => {
     for (let i = 0; i < 100; i++) {
         let randomName = getRandomFromArray(names);
-        let randomUserName = randomName.substring(0, randomName.indexOf(' ')) + getRandomInt(1,1000);
+        let randomUserName = randomName.split(" ").join("") + getRandomInt(1,1000);
         let randomDate = getRandomDate();
         let randomQuantity = getRandomInt(1, 10);
         let randomCity = getRandomFromArray(cities)
@@ -34,14 +32,17 @@ const populateTable = () => {
 }
 
 db.serialize(() => {
+    // Drops previous table
     dropTable("FACTURA")
 
+    // New Tables
     db.run(createFacturaTable)
     db.run(createFacturaItemsTable)
 
-
+    // Populate tables
     populateTable()
 
+    // Log db contents
     db.all("SELECT * FROM FACTURA;", function (err, rows) {
         console.log(err);
         console.log(rows);

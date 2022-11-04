@@ -1,3 +1,17 @@
+```bash
+
+thecodebuzz@DESKTOP-NUEMRRD:~$ sudo service redis-server restart
+Stopping redis-server: redis-server.
+Starting redis-server: redis-server.
+
+```
+
+
+
+
+
+
+
 # 1. Crea una tabla en sqlite en el navegador.
 Crea la tabla `FACTURA`.
 	id string (primary key)

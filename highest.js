@@ -17,5 +17,4 @@ db.serialize(() => {
     highestFactura()
 })
 
-
 db.close()

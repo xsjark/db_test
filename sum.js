@@ -18,5 +18,4 @@ db.serialize(() => {
     sumColumns()
 })
 
-
 db.close()
