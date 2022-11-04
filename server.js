@@ -13,20 +13,18 @@ const db = new sqlite.Database("./facturas.db", sqlite.OPEN_READWRITE, err => {
 const createFacturaTable = `CREATE TABLE IF NOT EXISTS FACTURA(ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, fecha TEXT, total INTEGER, nombre_cliente TEXT, ciudad TEXT)`
 const createFacturaItemsTable = `CREATE TABLE IF NOT EXISTS FACTURA_ITEMS(ID INTEGER PRIMARY KEY, idFactura TEXT, producto TEXT, cantidad INTEGER)`
 
-// insert dummy data into create "FACTURA" and  "FACTURA_ITEMS"
 
 const dropTable = (table) => {
     db.run(`DROP TABLE IF EXISTS ${table}`)
 }
 
+// insert dummy data into create "FACTURA" and  "FACTURA_ITEMS"
 const populateTable = () => {
-
-
     for (let i = 0; i < 100; i++) {
         let randomUserName = getRandomFromArray(names) + getRandomInt(1000);
         let randomName = getRandomFromArray(names);
         let randomDate = getRandomDate();
-        let randomQuantity = getRandomInt(100);
+        let randomQuantity = getRandomInt(10);
         let randomCity = getRandomFromArray(cities)
         db.run(`
             INSERT INTO FACTURA(username, fecha, total, nombre_cliente, ciudad) 
@@ -35,10 +33,13 @@ const populateTable = () => {
     }
 }
 
-const insertFacturaItem = ``;
+const sumColumns = () => {
+    db.all("SELECT SUM(total) from FACTURA", function (err, rows) {
+        console.log(err);
+        console.log(rows);
+    });
+}
 
-
-// query tables
 
 db.serialize(() => {
     dropTable("FACTURA")
@@ -53,6 +54,8 @@ db.serialize(() => {
         console.log(err);
         console.log(rows);
     });
+
+    sumColumns()
 })
 
 
